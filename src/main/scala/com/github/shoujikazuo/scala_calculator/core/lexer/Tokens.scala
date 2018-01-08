@@ -2,13 +2,20 @@ package com.github.shoujikazuo.scala_calculator.core.lexer
 
 sealed trait TokenType
 
-case class Token[A,+B <: TokenType](value: A, tpe: B)
+case class Token[+A](value: A, tpe: TokenType)
 
-case class Tokens[A,+B <: TokenType](values: Seq[Token[A,B]])
+case class Tokens[+A](values: Seq[Token[A]])
 
-case class LexerError(description: String)
+/**
+  * End Of Token. Token列の終わり．
+  */
+case object EOT extends TokenType
 
-case object NullTokenType extends TokenType
+/**
+  * 構文解析の開始時にプッシュダウンオートマトンへ積まれる開始トークン．
+  */
+case object StartTokenType extends TokenType
+
 case object NumericTokenType extends TokenType
 sealed trait OperatorTokenType extends TokenType {
   def isValid(aToken: Char): Boolean

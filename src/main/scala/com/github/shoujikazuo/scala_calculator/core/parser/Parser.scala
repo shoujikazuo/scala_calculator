@@ -7,3 +7,5 @@ trait Parser {
 
   def parse(aSource: ParserInputType): Either[ParserOutputType, ParserErrorType]
 }
+
+case class ParserError(description: String)

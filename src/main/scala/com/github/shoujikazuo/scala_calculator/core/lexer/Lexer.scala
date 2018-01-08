@@ -8,3 +8,4 @@ trait Lexer {
   def parse(aSource: LexerInputType): Either[LexerOutputType, LexerErrorType]
 }
 
+case class LexerError(description: String)
